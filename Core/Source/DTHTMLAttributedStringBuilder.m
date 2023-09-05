@@ -319,6 +319,12 @@
 		_defaultParagraphStyle.headIndent = [defaultHeadIndent integerValue];
 	}
 	
+	NSNumber *paragraphSpacing = [_options objectForKey:DTAttachmentParagraphSpacingAttribute];
+	if (paragraphSpacing)
+	{
+		_defaultParagraphStyle.paragraphSpacing = [paragraphSpacing floatValue];
+	}
+	
 	_defaultTag = [[DTHTMLElement alloc] init];
 	_defaultTag.fontDescriptor = _defaultFontDescriptor;
 	_defaultTag.paragraphStyle = _defaultParagraphStyle;
