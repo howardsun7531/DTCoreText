@@ -409,7 +409,7 @@
 	{
 		self->_currentTag.paragraphStyle.headIndent += (CGFloat)25.0 * self->_textScale;
 		self->_currentTag.paragraphStyle.firstLineHeadIndent = self->_currentTag.paragraphStyle.headIndent;
-		self->_currentTag.paragraphStyle.paragraphSpacing = self->_defaultFontDescriptor.pointSize;
+		self->_currentTag.paragraphStyle.paragraphSpacing = self->_defaultParagraphStyle.paragraphSpacing;
 	};
 	
 	[_tagStartHandlers setObject:[blockquoteBlock copy] forKey:@"blockquote"];
