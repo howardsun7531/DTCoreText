@@ -85,6 +85,7 @@
 	BOOL _ignoreParseEvents; // ignores events from parser after first HTML tag was finished
 	BOOL _ignoreInlineStyles; // ignores style blocks attached on elements
 	BOOL _preserverDocumentTrailingSpaces; // don't remove spaces at end of document
+	CGFloat _paragraphSpacing;
 	
 	DTHTMLParser  *_parser;
 }
@@ -311,6 +312,12 @@
 		_defaultParagraphStyle.headIndent = [defaultHeadIndent integerValue];
 	}
 	
+	NSNumber *paragraphSpacing = [_options objectForKey:DTAttachmentParagraphSpacingAttribute];
+	if (paragraphSpacing)
+	{
+		_paragraphSpacing = [paragraphSpacing floatValue];
+	}
+	
 	_defaultTag = [[DTHTMLElement alloc] init];
 	_defaultTag.fontDescriptor = _defaultFontDescriptor;
 	_defaultTag.paragraphStyle = _defaultParagraphStyle;
@@ -394,7 +401,7 @@
 	{
 		self->_currentTag.paragraphStyle.headIndent += (CGFloat)25.0 * self->_textScale;
 		self->_currentTag.paragraphStyle.firstLineHeadIndent = self->_currentTag.paragraphStyle.headIndent;
-		self->_currentTag.paragraphStyle.paragraphSpacing = self->_defaultFontDescriptor.pointSize;
+		self->_currentTag.paragraphStyle.paragraphSpacing = _paragraphSpacing > 0 ? _paragraphSpacing : self->_defaultFontDescriptor.pointSize;
 	};
 	
 	[_tagStartHandlers setObject:[blockquoteBlock copy] forKey:@"blockquote"];
